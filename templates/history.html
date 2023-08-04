@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+{% if data %}
+    <table class="tableCenter">
+        <tr class="grey">
+            <th style="text-align:center">User</th>
+            <th style="text-align:center">Symbol</th>
+            <th style="text-align:center">Price</th>
+            <th style="text-align:center">Amount</th>
+            <th style="text-align:center">Day</th>
+            <th style="text-align:center">Month</th>
+            <th style="text-align:center">Hour</th>
+            <th style="text-align:center">Minute</th>
+            <th style="text-align:center">Action</th>
+        </tr>
+        {% for row in data[::-1] %}
+        <tr class="withBigBorder lightgrey">
+            <td>{{ row["username"] }}</td>
+            <td>{{ row["symbol"] }}</td>
+            <td>{{ row["price"] }}</td>
+            <td>{{ row["amount"] }}</td>
+            <td>{{ row["day"] }}</td>
+            <td>{{ row["month"] }}</td>
+            <td>{{ row["hour"] }}</td>
+            <td>{{ row["minute"] }}</td>
+            <td>{{ row["method"] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+<h2>I'm sorry but it seems you don't have any history yet!</h2>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <table class="tableCenter">
+        <tr class="grey">
+            <th>Name</th>
+            <th>Price</th>
+            <th>Symbol</th>
+        </tr>
+        <tr class="withBorder lightgrey">
+            <td>{{ name }}</td>
+            <td>{{ price }}</td>
+            <td>{{ symbol }}</td>
+        </tr>
+    </table>
+
+{% endblock %}

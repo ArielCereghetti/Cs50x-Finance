@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<h2 style="margin-bottom: 20px">Buy a stock:</h2>
+<form action="/buy" method="POST">
+    <div class="mb-3">
+        <input type="text" name="symbol" placeholder="Symbol:" class="search"/>
+        <input class="shares no-arrow" type="text" name="shares" placeholder="50"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Buy</button>
+</form>
+
+
+<script>
+    let shares = document.querySelector("#shares")
+    shares.addEventListener("input", function() {
+        let x = shares.value + "";
+        if (x.length < 3) {
+            shares.style.maxWidth = "50px";
+        }
+        if (x.length == 3) {
+            shares.style.maxWidth = "60px";
+        }
+        else if (x.length == 4) {
+            shares.style.maxWidth = "80px";
+        }
+
+    })
+</script>
+
+{% endblock %}

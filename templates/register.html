@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <form action="/register" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+            <p id="warningUser" style="color:Red;font-weight:650;display:none;padding:8px;">Must provide a username!</p>
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+            <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Repeat password" type="password" style="margin-top: 5px;">
+            <p id="warning" style="color:Red;font-weight:650;display:None;padding:8px;">Both passwords must be equal!</p>
+        </div>
+        <button id="Butt" class="btn btn-primary" type="submit">Register</button>
+    </form>
+
+    <script>
+        let user = document.querySelector("#username")
+        let pass = document.querySelector("#password")
+        let con = document.querySelector("#confirmation")
+        let btn = document.getElementById("Butt");
+
+        function username() {
+
+            if (!user.value){
+                document.querySelector("#warningUser").style.display = "block"
+                btn.disabled = true;
+            }
+            else {
+                document.querySelector("#warningUser").style.display = "none"
+                btn.disabled = false;
+            }
+        }
+
+        function passwords() {
+
+            if (pass.value != con.value) {
+                document.querySelector("#warning").style.display = "block"
+            }
+            else {
+                document.querySelector("#warning").style.display = "none"
+            }
+        }
+
+
+        user.addEventListener("keydown", function() {
+            setTimeout(username, 300);
+        });
+
+        pass.addEventListener("keydown", function() {
+            setTimeout(passwords, 300);
+        });
+
+        con.addEventListener("keydown", function()  {
+            setTimeout(passwords, 300);
+        });
+    </script>
+
+{% endblock %}

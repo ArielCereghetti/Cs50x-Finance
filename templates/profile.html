@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+
+    <div class="profile">
+        <div id="pic-container">
+            <image src="/static/{{ image }}" class="profileImg"/>
+        </div>
+        <p class="changeimg" onclick="loadDoc()">Change profile image</p>
+        <p class="profileName">{{ session['username'] }}</p>
+    </div>
+
+
+<script>
+
+    function loadDoc() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        document.getElementById("pic-container").innerHTML = this.responseText;
+        }
+    xhttp.open("GET", "upload.html", true);
+    xhttp.send();
+    }
+
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,6 @@
+python3
+pip
+cs50 library for python
+Flask
+Flask-Session
+requests

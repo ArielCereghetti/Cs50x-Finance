@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<p style="text-align:center; margin: 45px; margin-top: 0;">
+
+
+    <a href="/profile"><image src="/static/{{session['user_img']}}" class="indexImg"/></a>
+
+    <h2 > {{ name }}</h2>
+    <a class="profile-link" href="/profile">Go to profile</a>
+</p>
+{% if stocks %}
+<h2 style="text-align:center; margin-top: 0;">Your shares</h2>
+
+<table class="tableCenter">
+    <tr class="grey">
+        <th>Symbol</th>
+        <th>Price p/share</th>
+        <th>Amount</th>
+        <th>Stocks + Price</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for stock in stocks %}
+    <tr class="withBorder lightgrey">
+        <form action="/buy" method="POST">
+            <td>{{ stock["symbol"] }}</td>
+            <td>${{ stock["price"] }}</td>
+            <td>{{ stock["amount"] }}</td>
+            <td>${{ stock["full"] }}</td>
+            <td style="display:flex;align-items:center;flex-direction:column;">
+                <input class="shares no-arrow" type="text" name="shares" placeholder="50"/>
+                <h6 class="No" >Not valid</h3>
+            </td>
+
+            <td>
+                <button type="submit" class="btn btn-primary">Buy more</button>
+            </td>
+
+            <input value="{{ stock['symbol'] }}" name="symbol" style="display:none;"/>
+        </form>
+    </tr>
+    {% endfor %}
+    <tr class="withBigBorder" style="width:100%;">
+        <th>Current amount of cash:</th>
+        <th>${{ cash }} </th>
+        <th>Stocks + cash:</th>
+        <th>${{ sum }} </th>
+    </tr>
+
+</table>
+
+<script>
+
+    let shares = document.querySelectorAll(".shares")
+    let no = document.querySelectorAll(".No")
+    let butt = document.querySelectorAll(".btn")
+
+    for(let i = 0; i < shares.length; i++)
+    {
+        shares[i].addEventListener("input", function() {
+            let num = shares[i].value
+            console.log(num)
+            if (num < 1) {
+                no[i].style.display = "block";
+                butt[i].disabled = true;
+            }
+            else {
+                no[i].style.display = "none";
+                butt[i].disabled = false;
+            }
+        })
+    }
+
+</script>
+
+
+{% else %}
+<h2 style="padding: 50px;">There are no shares in your account</h2>
+<h2>Current amount of cash: ${{ cash }}</h2>
+{% endif %}
+
+
+{% endblock %}

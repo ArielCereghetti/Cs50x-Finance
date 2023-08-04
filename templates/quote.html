@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<h2 style="margin-bottom: 20px">Search for a stock:</h2>
+<form action="/quote" method="POST">
+    <input class="search" type="text" name="symbol" placeholder="Stock"/>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+
+{% endblock %}
